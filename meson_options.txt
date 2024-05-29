@@ -62,3 +62,8 @@ option('tiny',
     type: 'feature', value: 'disabled',
     description: 'Also build tiny versions of some of the tools'
 )
+
+option('static',
+    type: 'feature', value: 'disabled',
+    description: 'Also build a statically linked version of some the tools'
+)

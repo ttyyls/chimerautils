@@ -122,4 +122,15 @@ if tiny.enabled() and libedit.found()
     )
 endif
 
+if static.enabled() and libedit_static.found()
+    shtiny_prog = executable(
+        'sh.static', sh_src,
+        c_args: sht_flags,
+        link_args: '-static',
+        include_directories: [inc],
+        link_with: [bltins_lib, libcompat],
+        install: true,
+    )
+endif
+
 install_man('sh.1')

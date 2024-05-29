@@ -28,4 +28,15 @@ if tiny.enabled() and libcrypto.found()
     )
 endif
 
+if static.enabled() and libcrypto_static.found()
+    sortiny_prog = executable(
+        'sort.static', sort_srcs,
+        include_directories: [inc],
+        link_with: [libcompat],
+        link_args: '-static',
+        c_args: ['-DWITHOUT_NLS', '-DWITHOUT_LIBCRYPTO'],
+        install: true,
+    )
+endif
+
 install_man('sort.1')

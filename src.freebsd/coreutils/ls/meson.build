@@ -28,4 +28,14 @@ if tiny.enabled() and get_option('color_ls')
     )
 endif
 
+if static.enabled() and get_option('color_ls')
+    lstiny_prog = executable(
+        'ls.static', ['cmp.c', 'ls.c', 'print.c', 'util.c'],
+        include_directories: [inc],
+        link_with: [libcompat],
+        link_args: '-static',
+        dependencies: [libfts, libacl_static],
+        install: true
+    )
+endif
 install_man('ls.1')

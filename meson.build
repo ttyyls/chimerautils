@@ -13,6 +13,7 @@ sbindir = get_option('sbindir')
 man1dir = join_paths(get_option('mandir'), 'man1')
 man5dir = join_paths(get_option('mandir'), 'man5')
 man8dir = join_paths(get_option('mandir'), 'man8')
+static = get_option('static')
 tiny = get_option('tiny')
 
 cc = meson.get_compiler('c')
@@ -96,15 +97,19 @@ endif
 
 # libacl is needed in several tools
 libacl = dependency('libacl', required: true)
+libacl_static = dependency('libacl', required: true, static: true)
 
 # bc(1) needs libedit
 libedit = dependency('libedit', required: get_option('libedit'))
+libedit_static = dependency('libedit', required: get_option('libedit'), static: true)
 
 # dc(1), install(1), sort(1), fetch(1) need libcrypto
 libcrypto = dependency('libcrypto', required: get_option('openssl'))
+libcrypto_static = dependency('libcrypto', required: get_option('openssl'), static: true)
 
 # fetch(1) needs libssl
 libssl = dependency('libssl', required: get_option('openssl'))
+libssl_static = dependency('libssl', required: get_option('openssl'), static: true)
 
 # seq(1) needs libm
 libm = cc.find_library('m', required: true)
@@ -114,15 +119,19 @@ libxo = dependency('libxo', required: true)
 
 # gzip needs zlib
 zlib = dependency('zlib', required: get_option('zlib'))
+zlib_static = dependency('zlib', required: get_option('zlib'), static: true)
 
 # gzip needs bzip2
 bzip2 = cc.find_library('bz2', required: get_option('bzip2'))
+bzip2_static = cc.find_library('bz2', required: get_option('bzip2'), static: true)
 
 # gzip needs liblzma
 lzma = dependency('liblzma', required: get_option('lzma'))
+lzma_static = dependency('liblzma', required: get_option('lzma'), static: true)
 
 # gzip needs zstd
 zstd = dependency('libzstd', required: get_option('zstd'))
+zstd_static = dependency('libzstd', required: get_option('zstd'), static: true)
 
 # needed by a few utils; provided by glibc, but not by e.g. musl
 
